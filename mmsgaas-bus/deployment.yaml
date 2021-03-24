@@ -17,7 +17,7 @@ spec:
         app: mmsgaas-bus
     spec:
       containers:
-        - image: cloops/mmsgaas:latest
+        - image: cloops/mmsgaas-bus:latest
           name: mmsgaas-bus
           imagePullPolicy: Always
           resources:
