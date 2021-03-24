@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mmsgaas-app
+  namespace: mmsgaas
+  labels:
+    app: mmsgaas-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mmsgaas-app
+  template:
+    metadata:
+      labels:
+        app: mmsgaas-app
+    spec:
+      containers:
+        - image: cloops/mmsgaas-app:latest
+          name: mmsgaas-app
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 200m
+            limits:
+              memory: 1000Mi
+              cpu: 400m
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mmsgaas-app
+  namespace: mmsgaas
+  labels:
+    app: mmsgaas-app
+spec:
+  selector:
+    app: mmsgaas-app
+  ports:
+  - name: mmsgaas-app
+    port: 38080
+    targetPort: 8081
+    protocol: TCP
+  type: LoadBalancer

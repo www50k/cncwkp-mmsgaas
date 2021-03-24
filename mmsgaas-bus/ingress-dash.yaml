@@ -1,0 +1,17 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: mmsgaas-bus
+  namespace: mmsgaas
+  labels:
+    app: mmsgaas-bus
+spec:
+  rules:
+    - host: dashboard.cloud.mmsgaas
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mmsgaas-bus
+              servicePort: 8161

@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mmsgaas-bus
+  namespace: mmsgaas
+  labels:
+    app: mmsgaas-bus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mmsgaas-bus
+  template:
+    metadata:
+      labels:
+        app: mmsgaas-bus
+    spec:
+      containers:
+        - image: cloops/mmsgaas:latest
+          name: mmsgaas-bus
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 200m
+            limits:
+              memory: 1000Mi
+              cpu: 400m
+          volumeMounts:
+            - mountPath: /var/lib/
+              name: pv0001
+      volumes:
+        - name: pv0001
+          persistentVolumeClaim:
+            claimName: mmsgaas-bus
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mmsgaas-bus
+  namespace: mmsgaas
+  labels:
+    app: mmsgaas-bus
+spec:
+  selector:
+    app: mmsgaas-bus
+  ports:
+  - name: dashboard
+    port: 8161
+    targetPort: 8161
+    protocol: TCP
+  - name: openwire
+    port: 61616
+    targetPort: 61616
+    protocol: TCP
+  - name: amqp
+    port: 5672
+    targetPort: 5672
+    protocol: TCP
+  - name: stomp
+    port: 61613
+    targetPort: 61613
+    protocol: TCP
+  - name: mqtt
+    port: 1883
+    targetPort: 1883
+    protocol: TCP
+  type: ClusterIP

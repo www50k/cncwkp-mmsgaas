@@ -1,0 +1,18 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: mmsgaas-app
+  namespace: mmsgaas
+  labels:
+    app: mmsgaas-app
+spec:
+  rules:
+    - host: "restapi.cloud.mmsgaas"
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/send"
+          backend:
+            serviceName: mmsgaas-app
+            servicePort: 38080
