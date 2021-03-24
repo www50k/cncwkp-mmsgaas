@@ -17,7 +17,39 @@ spec:
         app: mmsgaas-app
     spec:
       containers:
-        - image: cloops/mmsgaas-app:latest
+        - 
+          env:
+            - name: AMQ_USR
+              valueFrom:
+                secretKeyRef:
+                  key: spring.artemis.user
+                  name: mmsgaas-app
+            - name: AMQ_PWD
+              valueFrom:
+                secretKeyRef:
+                  key: spring.artemis.password
+                  name: mmsgaas-app
+            - name: SRV_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: mmsgaas-app
+                  key: server.port
+            - name: AMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: spring.artemis.host
+                  name: mmsgaas-app
+            - name: AMQ_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: spring.artemis.port
+                  name: mmsgaas-app
+            - name: AMQ_QUEU
+              valueFrom:
+                configMapKeyRef:
+                  key: jms.queue
+                  name: mmsgaas-app
+          image: cloops/mmsgaas-app:v0.10
           name: mmsgaas-app
           imagePullPolicy: Always
           resources:
@@ -42,6 +74,6 @@ spec:
   ports:
   - name: mmsgaas-app
     port: 38080
-    targetPort: 8081
+    targetPort: 8888
     protocol: TCP
   type: LoadBalancer
