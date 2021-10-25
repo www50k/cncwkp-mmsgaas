@@ -1,0 +1,21 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mmsgaas-gitops
+  namespace: argocd
+spec:
+  project: default
+  source: 
+    repoURL: https://github.com/www50k/cncwkp-mmsgaas.git
+    targetREVISION: HEAD
+  destination: 
+    server: https://kubernetes.defult.svc
+    namespace: mmsgaas
+  syncPolicy:
+    syncOptions::
+    - CreateNamespace=true
+  automated:
+    selfHeal: true
+    prune: true
+

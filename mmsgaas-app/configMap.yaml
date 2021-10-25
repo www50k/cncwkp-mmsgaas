@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
     spring.artemis.mode: 'native'
-    spring.artemis.host: '<CLUSTER_IP-MMSGAAS_BUS>'
+    spring.artemis.host: '10.105.95.101'
     spring.artemis.port: '61616'
     server.port: '8888'
     jms.queue: 'Q1.test'

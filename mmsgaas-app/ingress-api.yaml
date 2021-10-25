@@ -1,5 +1,5 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mmsgaas-app
@@ -14,5 +14,7 @@ spec:
         - pathType: Prefix
           path: "/send"
           backend:
-            serviceName: mmsgaas-app
-            servicePort: 38080
+            service:
+              name: mmsgaas-app
+              port: 
+               number: 38080
