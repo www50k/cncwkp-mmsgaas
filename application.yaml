@@ -1,21 +1,64 @@
 
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mmsgaas-gitops
+  name: cncwkp-mmsgaas-env
   namespace: argocd
 spec:
   project: default
-  source: 
-    repoURL: https://github.com/www50k/cncwkp-mmsgaas.git
-    targetREVISION: HEAD
-  destination: 
-    server: https://kubernetes.defult.svc
+  source:
+    repoURL: 'https://github.com/www50k/cncwkp-mmsgaas.git'
+    path: mmsgaas-env
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
     namespace: mmsgaas
   syncPolicy:
-    syncOptions::
-    - CreateNamespace=true
-  automated:
-    selfHeal: true
-    prune: true
-
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cncwkp-mmsgaas-bus
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/www50k/cncwkp-mmsgaas.git'
+    path: mmsgaas-bus
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: mmsgaas
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cncwkp-mmsgaas-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/www50k/cncwkp-mmsgaas.git'
+    path: mmsgaas-app
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: mmsgaas
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
