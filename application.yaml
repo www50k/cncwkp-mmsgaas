@@ -1,46 +1,45 @@
-
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: cncwkp-mmsgaas-env
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: 'https://github.com/www50k/cncwkp-mmsgaas.git'
-    path: mmsgaas-env
-    targetRevision: HEAD
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: mmsgaas
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: cncwkp-mmsgaas-bus
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: 'https://github.com/www50k/cncwkp-mmsgaas.git'
-    path: mmsgaas-bus
-    targetRevision: HEAD
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: mmsgaas
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: cncwkp-mmsgaas-env
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: 'https://github.com/www50k/cncwkp-mmsgaas.git'
+#     path: mmsgaas-env
+#     targetRevision: HEAD
+#   destination:
+#     server: 'https://kubernetes.default.svc'
+#     namespace: mmsgaas
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: cncwkp-mmsgaas-bus
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: 'https://github.com/www50k/cncwkp-mmsgaas.git'
+#     path: mmsgaas-bus
+#     targetRevision: HEAD
+#   destination:
+#     server: 'https://kubernetes.default.svc'
+#     namespace: mmsgaas
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
